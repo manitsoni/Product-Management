@@ -1,0 +1,51 @@
+﻿@foreach (var item in ViewBag.ProductList)
+{
+<table border="1" align="center">
+    <tbody>
+     
+            <tr>
+                <td>Small Image</td>
+                <td><img src="~/ShortImage/@item.ImagePath" alt="Alternate Text" width="50" height="50" style="box-shadow:0px 4px 8px;" /></td>
+            </tr>
+            <tr>
+                <td>Large Image</td>
+                <td><img src="~/ShortImage/@item.ImagePath" alt="Alternate Text" width="150" height="150" style="box-shadow:0px 4px 8px;" /></td>
+            </tr>
+            <tr>
+                <td>Category Name</td>
+                <td>@item.CategoryName</td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td>@item.ProductName</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>@item.Price</td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td>@item.Qty</td>
+            </tr>
+            <tr>
+                <td>Short Description</td>
+                <td>@item.ShortDescription</td>
+            </tr>
+            <tr>
+                <td>Long Description</td>
+                <td>@item.LongDescription</td>
+        </tr>
+            <tr>
+                <td>Created Date</td>
+                <td>@item.CreatedDate</td>
+            </tr>
+            <tr>
+
+                <td>Updated Date</td>
+                <td>@item.UpdatedDate</td>
+            </tr>
+       
+    </tbody>
+ </table>
+}
+

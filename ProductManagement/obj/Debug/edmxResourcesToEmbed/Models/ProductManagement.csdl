@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProductManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="ProductManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserDatas" EntityType="Self.UserData" />
+    <EntitySet Name="tblCategories" EntityType="ProductManagementModel.tblCategory" />
+    <EntitySet Name="tblProducts" EntityType="ProductManagementModel.tblProduct" />
+    <AssociationSet Name="FK_tblProduct_tblCategory" Association="ProductManagementModel.FK_tblProduct_tblCategory">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Createddate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProducts" Relationship="ProductManagementModel.FK_tblProduct_tblCategory" FromRole="tblCategory" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SmallImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LongImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="tblCategory" Relationship="ProductManagementModel.FK_tblProduct_tblCategory" FromRole="tblProduct" ToRole="tblCategory" />
+  </EntityType>
+  <Association Name="FK_tblProduct_tblCategory">
+    <End Type="ProductManagementModel.tblCategory" Role="tblCategory" Multiplicity="0..1" />
+    <End Type="ProductManagementModel.tblProduct" Role="tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
