@@ -1,27 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "ProductList";
-    Layout = "~/Views/Shared/_ProductLayouts.cshtml";
+    Layout = "~/Views/Shared/_AdminLayouts.cshtml";
 }
-
-<script src="~/scripts/jquery-3.3.1.min.js"></script>
-<script src="~/scripts/bootstrap.min.js"></script>
-<script src="~/scripts/jquery.dataTables.min.js"></script>
-<script src="~/scripts/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('#DataTable').DataTable();
-            $('#checkBoxAll').click(function () {
-                if ($(this).is(":checked")) {
-                    $(".chkCheckBoxId").prop("checked", true)
-                }
-                else {
-                    $(".chkCheckBoxId").prop("checked", false)
-                }
-            });
+    $(document).ready(function () {
+        $('#DataTable').DataTable();
+        $('#checkBoxAll').click(function () {
+            if ($(this).is(":checked")) {
+                $(".chkCheckBoxId").prop("checked", true)
+            }
+            else {
+                $(".chkCheckBoxId").prop("checked", false)
+            }
         });
-</script>  
+    });
+</script>
 <h2>ProductList</h2>
 
 <div class="card shadow mb-4">
@@ -33,11 +28,11 @@
         <div class="table-responsive">
             @using (Html.BeginForm("DeleteAll", "Product", FormMethod.Post))
             {
-                <button type="submit" value="Delete" class="btn btn-sm btn-danger rounded-0" onclick="return confirm('Are you sure?')"><i class="fa fa-trash-o"></i> Delete</button>  <br /><br />
+                <button type="submit" value="Delete" class="btn btn-sm btn-danger rounded-0" onclick="return confirm('Are you sure?')"><i class="fa fa-trash-o"></i> Delete</button> <br /><br />
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="full-opacity-hover">
                         <tr>
-                            <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" /></th>  
+                            <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" /></th>
                             <td>Small Image</td>
                             <td>Category Name</td>
                             <td>Product Name</td>
@@ -47,10 +42,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in ViewBag.ProductList)
+                        @foreach (var item in ViewBag.List)
                         {
                             <tr>
-                                <td><input type="checkbox" name="ID" value="@item.Id" class="custom-checkbox chkCheckBoxId" /></td>  
+                                <td><input type="checkbox" name="ID" value="@item.Id" class="custom-checkbox chkCheckBoxId" /></td>
                                 <td><img src="~/ShortImage/@item.ImagePath" alt="Alternate Text" width="50" height="50" style="box-shadow:0px 4px 8px;" /></td>
                                 <td>@item.CategoryName</td>
                                 <td>@item.ProductName</td>
@@ -83,7 +78,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Product category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -113,7 +108,6 @@
             }
         });
     });
- 
     function Details(id) {
         $.ajax({
             //type: "POST",
@@ -141,9 +135,10 @@
                 $('#myModalBodyDiv1').html(data);
                 $('#myModal1').modal('show');
             },
-            error: function () {
-                alert("fail");
+            error: function (responce) {
+                alert(responce.getResponseHeader);
             }
         });
     }
+   
 </script>

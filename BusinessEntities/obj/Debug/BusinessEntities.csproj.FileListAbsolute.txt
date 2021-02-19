@@ -1,0 +1,6 @@
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\bin\Debug\BusinessEntities.dll
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\bin\Debug\BusinessEntities.pdb
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\obj\Debug\BusinessEntities.dll
+D:\Practices\ProductManagement\ProductManagement\BusinessEntities\obj\Debug\BusinessEntities.pdb

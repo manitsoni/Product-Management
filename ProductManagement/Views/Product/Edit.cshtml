@@ -1,5 +1,6 @@
-﻿@model ProductManagement.Models.tblProduct
-@{ 
+﻿@model BusinessEntities.Entities.ProductList
+
+@{
     Layout = null;
 }
 @using (Html.BeginForm())
@@ -9,16 +10,16 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.IsActive)
+        @*@Html.HiddenFor(model => model.IsActive)
         @Html.HiddenFor(model => model.CreatedDate)
-        @Html.HiddenFor(model=>model.SmallImage)
-        <div class="form-group">
+        @Html.HiddenFor(model => model.SmallImage)*@
+        @*<div class="form-group">
             @Html.Label("Select Category", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.CategoryList, "--Select Category--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -36,13 +37,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })

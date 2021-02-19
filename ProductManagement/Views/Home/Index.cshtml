@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>User Login</h1>
+<div class="modal-dialog-centered" align="center">
+    <form action="/Home/Login" method="post">
+        Email : <input type="text" name="email" value="" class="form-control" align="center"/><br />
+        Password : <input type="password" name="password" value="" class="form-control" /><br />
+        <input type="submit" name="btnLogin" value="Login" class="btn btn-info" />
+    </form>
+</div>

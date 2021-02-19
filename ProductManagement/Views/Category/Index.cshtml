@@ -1,0 +1,134 @@
+﻿@model BusinessEntities.Entities.CategoryEntities
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayouts.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.js" integrity="sha512-4WpSQe8XU6Djt8IPJMGD9Xx9KuYsVCEeitZfMhPi8xdYlVA5hzRitm0Nt1g2AZFS136s29Nq4E4NVvouVAVrBw==" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Add New Category</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <form name="Vehical" id="Vehical" method="post">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Add New Category</label>
+                                @Html.TextBoxFor(model => model.CategoryName, new { @class="form-control",@id="Category"})
+                                
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating"></label>
+                                <input type="button" value="Add Category" class="btn btn-primary pull-right" id="btnSave" onclick="return Add();" />
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">My Category List</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                  Id
+                                </th>
+                                <th>
+                                   CategoryName
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        loadData();
+    });
+    function Add() {
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: '@Url.Action("AddCategory", "Category")',
+            //data: JSON.stringify($('#Vehical').serialize()),
+            data: JSON.stringify({ categoryname: $("#Category").val()}),
+            success: function (statuscode) {
+                if (statuscode == true) {
+                    alert("Added New Category");
+                }
+                else {
+                    alert("Category Already Exists");
+                }
+              
+                $("#Category").val("");
+                loadData();
+            },
+            error: function (responcetext) {
+                alert(responcetext.responseText);
+            }
+        });
+    }
+      function loadData() {
+        $.ajax({
+            url:'@Url.Action("GetCategory", "Category")',
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.Id + '</td>';
+                    html += '<td>' + item.CategoryName + '</td>';
+                    html += '<td>' + item.IsActive + '</td>';
+
+                    //html += '<td><a href="#" onclick="return getbyID(' + item.Id + ')">Edit</a> | <a href="#" onclick="Delele(' + item.Id + ')">Delete</a></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+
